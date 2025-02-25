@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js';
+import { error } from 'console';
 
 dotenv.config();
 mongoose.connect(process.env.MONGO)
@@ -22,3 +23,13 @@ app.listen(3000, () => {
 
 app.use('/backEnd/user',userRoutes)
 app.use('/backEnd/auth',authRoutes)
+
+app.use((err,req,res,next)=>{
+    const statusCode=err.statusCode||500;
+    const message=err.message||'internal Server Error';
+    return res.status(statusCode).json({
+    success:false,
+    error:message,
+    statusCode,    
+    });
+})
