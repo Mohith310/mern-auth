@@ -22,3 +22,13 @@ app.listen(3000,()=>{
 
 app.use("/backEnd/user", userRoutes)
 app.use('/backEnd/auth',authRoutes)
+
+app.use((err,req,res,next)=>{
+    const statusCode= err.statusCode || 500
+    const message= err.message || "SInternal Server Error!"
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    })
+})
