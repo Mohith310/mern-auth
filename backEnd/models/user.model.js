@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
+    },
+    profilePicture:{
+        type: String,
+        default: "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg?ga=GA1.1.421566531.1739364145&semt=ais_hybrid&w=740",
     }
 }, { timestamps: true });
 
